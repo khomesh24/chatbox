@@ -10,9 +10,16 @@ def start():
     mysocket.listen(1)
     con, addr = mysocket.accept()
     print("connectition form "+ str(addr))
+    while True:
+        data = con.recv(1024).decode();
+        if not data:
+            break
+        print("form client"+ str(data))
+        msg = input("->")
+        con.send(msg.encode())
+    con.close()
 
 
-    print("server started")
 
 
 if __name__ == '__main__':
